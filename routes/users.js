@@ -44,7 +44,7 @@ router.post("/attendance", async (req, res) => {
   }
 });
 
-router.get("/user-data", async (_, res) => {
+router.get("/data", async (_, res) => {
   try {
     const users = await User.find({}, "employeeID name attendance");
 
