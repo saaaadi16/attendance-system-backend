@@ -49,12 +49,14 @@ router.get("/data", async (_, res) => {
     const users = await User.find({}, "employeeID name attendance");
 
     const newUsers = users.map((user) => {
-      const { employeeID, name, attendance } = user;
-      const newAttendance = attendance.map((item) => {
-        const { date, status, _id } = item;
-        return { date, status, _id };
-      });
-      return { employeeID, name, attendance: newAttendance };
+      if (user.attendance.length > 0) {
+        const { employeeID, name, attendance } = user;
+        const newAttendance = attendance.filter((item) => {
+          const { date, status, _id } = item;
+          return { date, status, _id };
+        });
+        return { employeeID, name, attendance: newAttendance };
+      } else return;
     });
 
     res.json(newUsers);
