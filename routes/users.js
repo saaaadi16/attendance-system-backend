@@ -51,8 +51,8 @@ router.get("/data", async (_, res) => {
     const newUsers = users.map((user) => {
       const { employeeID, name, attendance } = user;
       const newAttendance = attendance.map((item) => {
-        const { date, status } = item;
-        return { date, status };
+        const { date, status, _id } = item;
+        return { date, status, _id };
       });
       return { employeeID, name, attendance: newAttendance };
     });
